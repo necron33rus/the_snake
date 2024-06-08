@@ -6,7 +6,8 @@ pg.init()
 
 # Константы для размеров поля и сетки:
 SCREEN_WIDTH, SCREEN_HEIGHT = 640, 480
-SCREEN_CENTER_WIDTH, SCREEN_CENTER_HEIGHT = SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2
+SCREEN_CENTER_WIDTH = SCREEN_WIDTH // 2
+SCREEN_CENTER_HEIGHT = SCREEN_HEIGHT // 2
 GRID_SIZE = 20
 GRID_WIDTH = SCREEN_WIDTH // GRID_SIZE
 GRID_HEIGHT = SCREEN_HEIGHT // GRID_SIZE
@@ -77,7 +78,7 @@ class Apple(GameObject):
                              randint(0, GRID_HEIGHT - 1) * GRID_SIZE]
 
     def draw(self):
-        """Отрисовка яблока на игровом поле."""
+        """Отрисовка яблока на экране."""
         self.draw_cell(self.position)
 
 
@@ -98,8 +99,10 @@ class Snake(GameObject):
         """Обновляется позиция змейки."""
         current_head = self.get_head_position()
         x_direction, y_direction = self.direction
-        new_position = [(current_head[0] + x_direction * GRID_SIZE) % SCREEN_WIDTH,
-                        (current_head[1] + y_direction * GRID_SIZE) % SCREEN_HEIGHT]
+        new_position = [
+            (current_head[0] + x_direction * GRID_SIZE) % SCREEN_WIDTH,
+            (current_head[1] + y_direction * GRID_SIZE) % SCREEN_HEIGHT
+        ]
 
         self.positions.insert(0, new_position)
         if len(self.positions) > self.length:
@@ -147,7 +150,7 @@ def handle_keys(game_object) -> None:
 
 
 def main():
-
+    """Основная функция."""
     snake = Snake()
     apple = Apple()
 
