@@ -94,10 +94,10 @@ class Snake(GameObject):
 
     def move(self):
         """Обновляется позиция змейки."""
-        current_head_position_x, current_head_position_y = self.get_head_position()
+        current_head_x, current_head_y = self.get_head_position()
         x_direction, y_direction = self.direction
-        new_head_x = current_head_position_x + x_direction * GRID_SIZE
-        new_head_y = current_head_position_y + y_direction * GRID_SIZE
+        new_head_x = current_head_x + x_direction * GRID_SIZE
+        new_head_y = current_head_y + y_direction * GRID_SIZE
         new_position = [new_head_x % SCREEN_WIDTH,
                         new_head_y % SCREEN_HEIGHT]
 
