@@ -7,8 +7,6 @@ pg.init()
 # Константы для размеров поля и сетки:
 SCREEN_WIDTH, SCREEN_HEIGHT = 640, 480
 SCREEN_CENTER = [SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2]
-#SCREEN_CENTER_WIDTH = SCREEN_WIDTH // 2
-#SCREEN_CENTER_HEIGHT = SCREEN_HEIGHT // 2
 GRID_SIZE = 20
 GRID_WIDTH = SCREEN_WIDTH // GRID_SIZE
 GRID_HEIGHT = SCREEN_HEIGHT // GRID_SIZE
@@ -98,10 +96,10 @@ class Snake(GameObject):
         """Обновляется позиция змейки."""
         current_head_position_x, current_head_position_y = self.get_head_position()
         x_direction, y_direction = self.direction
-        new_position = [
-            (current_head_position_x + x_direction * GRID_SIZE) % SCREEN_WIDTH,
-            (current_head_position_y + y_direction * GRID_SIZE) % SCREEN_HEIGHT
-        ]
+        new_head_x = current_head_position_x + x_direction * GRID_SIZE
+        new_head_y = current_head_position_y + y_direction * GRID_SIZE
+        new_position = [new_head_x % SCREEN_WIDTH,
+                        new_head_y % SCREEN_HEIGHT]
 
         self.positions.insert(0, new_position)
         if len(self.positions) > self.length:
@@ -149,6 +147,7 @@ def handle_keys(game_object) -> None:
 
 
 def get_random_position():
+    """Генерация новой рандомной позиции."""
     return [randint(0, GRID_WIDTH - 1) * GRID_SIZE,
             randint(0, GRID_HEIGHT - 1) * GRID_SIZE]
 
